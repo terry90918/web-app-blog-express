@@ -1,0 +1,58 @@
+doctype html
+html(lang="zh-Hant-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title Demo
+    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.6.3/css/all.css")
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css")
+    //- 圖片來源：http://www.gratisography.com/#objects
+    link(rel="stylesheet", href="/stylesheets/index.css")
+  body
+    header
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+        .container
+          a.navbar-brand(href="/")
+            i.fa.fa-diamond(aria-hidden="true")
+            | Demo
+          button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNavAltMarkup", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+          #navbarNavAltMarkup.collapse.navbar-collapse
+            .navbar-nav.ml-auto
+              a.nav-item.nav-link(href="#")
+                | 心得
+              a.nav-item.nav-link(href='#')
+                | 課程  
+              a.nav-item.nav-link(href='#')
+                | 新聞 
+    section
+      .container
+        block content
+      nav.my-5(aria-label='Page navigation example')
+        ul.pagination.justify-content-center
+          li.page-item.disabled
+            a.page-link(href='/?page=0', tabindex='-1') Previous
+          li.page-item.active
+            a.page-link(href='/?page=1')
+              | 1
+          li.page-item
+            a.page-link(href='/?page=2')
+              | 2
+          li.page-item
+            a.page-link(href='/?page=2') Next
+    footer
+      .bg-light.text-muted.py-5
+        .container
+          ul.list-unstyled.d-flex.justify-content-between
+            li © Copright 2019 Demo 部落格
+            li.ml-auto
+              a.text-info.px-1(href='#')
+                i.fab.fa-instagram(aria-hidden='true')
+              a.text-info.px-1(href='#')
+                i.fab.fa-facebook-square(aria-hidden='true')
+              a.text-info.px-1(href='#')
+                i.fab.fa-twitter(aria-hidden='true')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js')

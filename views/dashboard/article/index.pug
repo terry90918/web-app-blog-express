@@ -1,0 +1,44 @@
+extends /layout/dashboard
+
+block content
+  form.row.justify-content-center(method='POST')
+    .col-md-9
+      label(for='title') 請輸入標題
+      input#title.form-control(type='text', name='title', placeholder='標題', value='')
+      hr
+      textarea#editor.form-control(name='content')
+      script.
+        ClassicEditor
+          .create(document.querySelector('#editor'))
+          .catch(error => {
+            console.error( error );
+          });
+    .col-md-3
+      .card.mb-3
+        h6.card-header 分類
+        .card-body
+          .form-check
+            label.form-check-label
+              input.form-check-input(type='radio', name='category', required='', value='-L2TajOWL1ycB_hwyiK-')
+              |               心得
+          .form-check
+            label.form-check-label
+              input.form-check-input(type='radio', name='category', required='', value='-L2VDz-ovFCKMA34kfdY')
+              |               課程
+          .form-check
+            label.form-check-label
+              input.form-check-input(type='radio', name='category', required='', value='-L3VkF87JcRmUUjxhi0g')
+              |               新聞
+      .card.mb-3
+        h6.card-header 是否公開
+        .card-body
+          .btn-group.btn-group-toggle.w-100(data-toggle='buttons')
+            label.btn.btn-outline-primary.w-100
+              input(type='radio', name='status', autocomplete='off', value='draft')
+              |  草稿
+            label.btn.btn-outline-primary.w-100
+              input(type='radio', name='status', autocomplete='off', value='public')
+              |  公開
+      .btn-group.w-100
+        button.btn.btn-outline-primary.w-100(type='submit') 儲存
+
