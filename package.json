@@ -1,5 +1,5 @@
 {
-  "name": "app-express-blog",
+  "name": "app-blog-express",
   "version": "1.0.0",
   "private": true,
   "scripts": {
