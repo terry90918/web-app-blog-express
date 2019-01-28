@@ -6,11 +6,6 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
 var routerIndex = require('./routes/index');
-var routerPost = require('./routes/post/index');
-var routerDashboardArchives = require('./routes/dashboard/archives/index');
-var routerDashboardArticle = require('./routes/dashboard/article/index');
-var routerDashboardCategories = require('./routes/dashboard/categories/index');
-var routerDashboardSignup = require('./routes/dashboard/signup/index');
 
 var app = express();
 
@@ -32,11 +27,6 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routerIndex);
-app.use('/post', routerPost);
-app.use('/dashboard/archives', routerDashboardArchives);
-app.use('/dashboard/article', routerDashboardArticle);
-app.use('/dashboard/categories', routerDashboardCategories);
-app.use('/dashboard/signup', routerDashboardSignup);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

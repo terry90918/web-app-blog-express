@@ -1,0 +1,32 @@
+extends /layout/dashboard
+
+block content
+  .row.justify-content-center
+    .col-md-6
+      table.table
+        thead
+          tr
+            th 名稱
+            th 路徑
+            th(width='30')
+        tbody
+          tr
+            td.align-middle 心得
+            td
+              input.form-control.form-control-sm(type='text', value='mind')
+            td.align-middle
+              form(method='POST')
+                button.btn.btn-outline-danger.btn-sm(type='submit') 刪除
+      form(method='POST')
+        table.table
+          tbody
+            tr
+              td.align-middle 新增
+              td
+                label(for='name') 分類名稱
+                input#name.form-control(type='text', name='name', placeholder='請輸入分類名稱')
+              td(colspan='2')
+                label(for='path') 路徑
+                input#path.form-control(type='text', name='path', placeholder='請輸入分類路徑')
+        .text-right
+          button.btn.btn-primary(type='submit') 更新資訊

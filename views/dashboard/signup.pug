@@ -1,0 +1,22 @@
+extends /layout/dashboard
+
+block content
+  .main.container-fluid.my-4
+    .row.justify-content-center
+      .col-sm-6
+        form(method='POST', action='/auth/signup')
+          .form-group
+            label(for='exampleInputEmail1') Email
+            input#exampleInputEmail1.form-control(type='email', name='email', aria-describedby='emailHelp', placeholder='請輸入 email', required='')
+            small#emailHelp.form-text.text-muted 我們不會隨意散佈你的 Email
+          .form-group
+            label(for='password') 密碼
+            input#password.form-control(type='password', name='password', placeholder='請輸入密碼', required='')
+          .form-group
+            label(for='confirm_password') 確認密碼
+            input#confirm_password.form-control(type='password', name='confirm_password', placeholder='確認密碼', required='')
+          .form-check
+            input#confirm.form-check-input(type='checkbox', required='')
+            label.form-check-label(for='confirm') 請確認你了解這是自己做的 Blog
+          .text-right.mt-3
+            button.btn.btn-primary(type='submit') Submit
