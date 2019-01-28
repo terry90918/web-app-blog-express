@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../connections/firebase_admin');
+
+// const ref = db.ref('any');
+// ref.once('value', (snapshot) => {
+//   console.log('/', snapshot.val());
+// });
 
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
@@ -7,18 +13,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/post', (req, res, next) => {
   res.render('post', { title: 'Express' });
-});
-
-router.get('/dashboard/archives', (req, res, next) => {
-  res.render('dashboard/archives', { title: 'Express' });
-});
-
-router.get('/dashboard/article', (req, res, next) => {
-  res.render('dashboard/article', { title: 'Express' });
-});
-
-router.get('/dashboard/categories', (req, res, next) => {
-  res.render('dashboard/categories', { title: 'Express' });
 });
 
 router.get('/dashboard/signup', (req, res, next) => {
