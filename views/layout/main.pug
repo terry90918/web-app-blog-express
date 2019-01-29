@@ -1,31 +1,29 @@
 doctype html
-html(lang="zh-Hant-TW")
+html(lang='zh-Hant-TW')
   head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
     title Blog
-    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.6.3/css/all.css")
-    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css")
-    //- 圖片來源：http://www.gratisography.com/#objects
-    link(rel="stylesheet", href="/stylesheets/index.css")
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.6.3/css/all.css')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/index.css')
   body
     header
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         .container
-          a.navbar-brand(href="/")
-            i.fa.fa-diamond(aria-hidden="true")
-            | Blog
-          button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNavAltMarkup", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+          a.navbar-brand(href='/')
+            i.fa.fa-diamond(aria-hidden='true') Blog
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
-          #navbarNavAltMarkup.collapse.navbar-collapse
-            .navbar-nav.ml-auto
-              a.nav-item.nav-link(href="#")
-                | 心得
-              a.nav-item.nav-link(href='#')
-                | 課程  
-              a.nav-item.nav-link(href='#')
-                | 新聞 
+          #navbarSupportedContent.collapse.navbar-collapse
+            ul.navbar-nav.ml-auto
+              li.nav-item
+                a.nav-link(href='#') 心得
+              li.nav-item
+                a.nav-link(href='#') 課程
+              li.nav-item
+                a.nav-link(href='#') 新聞
     section
       .container
         block content
@@ -34,11 +32,9 @@ html(lang="zh-Hant-TW")
           li.page-item.disabled
             a.page-link(href='/?page=0', tabindex='-1') Previous
           li.page-item.active
-            a.page-link(href='/?page=1')
-              | 1
+            a.page-link(href='/?page=1') 1
           li.page-item
-            a.page-link(href='/?page=2')
-              | 2
+            a.page-link(href='/?page=2') 2
           li.page-item
             a.page-link(href='/?page=2') Next
     footer
