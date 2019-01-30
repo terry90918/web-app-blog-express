@@ -1,0 +1,14 @@
+extends /layout/auth
+
+block content
+  form.form-sign-in(method='POST', action='/auth/sign-in')
+    .form-label-group
+      input#inputEmail.form-control(type='email', placeholder='Email Address', required, autofocus)
+      label(for='inputEmail') Email Address
+    .form-label-group
+      input#inputPassword.form-control(type='password', placeholder='Password', required)
+      label(for='inputPassword') Password
+    .custom-control.custom-checkbox.mb-3.text-center
+      input#customCheckBox.custom-control-input(type='checkbox', value='remember-me')
+      label.custom-control-label(for='customCheckBox') Remember me
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
