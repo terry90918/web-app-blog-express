@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../connections/firebase_admin');
 const striptags = require('striptags');
 const moment = require('moment');
+const convertPagination = require('../modules/convertPagination');
 
 const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
@@ -14,8 +15,11 @@ const articlesRef = db.ref('/blog/articles/');
 
 /* 取得文章列表 */
 router.get('/', (req, res, next) => {
-  let categories = {};
   let articles = [];
+  let categories = {};
+  let currentPage = Number.parseInt(req.query.page) || 1; // 當前頁數
+  let data = [];
+  let page = {};
   categoriesRef
     .once('value')
     .then((snapshot) => {
@@ -31,21 +35,55 @@ router.get('/', (req, res, next) => {
           articles.push(child);
         }
       });
-      return Promise.resolve(articles.reverse());
+      articles.reverse();
+      return Promise.resolve('Success');
+    })
+    .then(() => {
+      /* 分頁處理 - Start */
+      const val = convertPagination(articles, currentPage);
+      data = val.data;
+      page = val.page;
+      return Promise.resolve('Success');
+      /* 分頁處理 - End */
     })
     .then(() => {
       res.render('index', {
-        articles,
+        articles: data,
         categories,
         moment,
+        page,
         striptags,
         title: 'Express',
       });
+    })
+    .catch((error) => {
+      console.warn(error);
     });
 });
 
-router.get('/post', (req, res, next) => {
-  res.render('post', { title: 'Express' });
+/* 取得文章內容 */
+router.get('/post/:id', (req, res, next) => {
+  const id = req.params.id;
+  let categories = {};
+  let article = {};
+  categoriesRef
+    .once('value')
+    .then((snapshot) => {
+      categories = snapshot.val();
+      return articlesRef
+        .child(id)
+        .once('value');
+    })
+    .then((snapshot) => {
+      article = snapshot.val();
+      res.render('post', {
+        article,
+        categories,
+        moment,
+        striptags, 
+        title: 'Post: ' + id
+      });
+    });
 });
 
 router.get('/dashboard/signup', (req, res, next) => {

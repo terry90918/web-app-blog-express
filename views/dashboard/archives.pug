@@ -6,7 +6,7 @@ block content
       .btn-group.w-100(role='group')
         a.btn.btn-outline-secondary.w-100(class={'active': status === 'public'}, href='/dashboard/archives?status=public') 已發佈
         a.btn.btn-outline-secondary.w-100(class={'active': status === 'draft'}, href='/dashboard/archives?status=draft') 草稿
-        a.btn.btn-primary(href='article.html') 新增文章
+        a.btn.btn-primary(href='/dashboard/article/create') 新增文章
       for prop in articles
         .card.my-3
           h4.card-header= prop.title
@@ -24,21 +24,10 @@ block content
                   if prop.category === item.id
                     span= item.name
           .card-footer.p-0.btn-group
-            a.btn.btn-outline-danger.deletePost(href='#', data-id=prop.id, data-title=prop.title) 刪除
-            a.btn.btn-outline-secondary.w-100(href='#') 編輯
-            a.btn.btn-outline-secondary.w-100(href='#', target='_blank') 預覽
-  nav.my-5(aria-label='Page navigation example')
-    ul.pagination.justify-content-center
-      li.page-item.disabled
-        a.page-link(href='/dashboard/archives', tabindex='-1') Previous
-      li.page-item.active
-        a.page-link(href='/dashboard/archives')
-          | 1
-      li.page-item
-        a.page-link(href='/dashboard/archives')
-          | 2
-      li.page-item
-        a.page-link(href='/dashboard/archives') Next
+            button.btn.btn-outline-danger.deletePost(data-id=prop.id, data-title=prop.title) 刪除
+            a.btn.btn-outline-secondary.w-100(href='/dashboard/article/' + prop.id) 編輯
+            a.btn.btn-outline-secondary.w-100(href='/post/' + prop.id, target='_blank') 預覽
+  include /includes/pagination.pug
   script.
     $(document).ready(function() {
       $('.deletePost').on('click', function(e) {

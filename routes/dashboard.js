@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../connections/firebase_admin');
 const striptags = require('striptags');
 const moment = require('moment');
+const convertPagination = require('../modules/convertPagination');
 
 const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
@@ -14,9 +15,12 @@ const articlesRef = db.ref('/blog/articles/');
 
 /* 取得文章列表 */
 router.get('/archives', (req, res, next) => {
-  const status = req.query.status || 'public';
-  let categories = {};
   let articles = [];
+  let categories = {};
+  let currentPage = Number.parseInt(req.query.page) || 1; // 當前頁數
+  let data = [];
+  let page = {};
+  let status = req.query.status || 'public';
   categoriesRef
     .once('value')
     .then((snapshot) => {
@@ -32,13 +36,25 @@ router.get('/archives', (req, res, next) => {
           articles.push(child);
         }
       });
-      return Promise.resolve(articles.reverse());
+      articles.reverse();
+      return Promise.resolve('Success');
+    })
+    .then(() => {
+      /* 分頁處理 - Start */
+      const val = convertPagination(articles, currentPage);
+      data = val.data;
+      page = val.page;
+      console.log(page);
+      
+      return Promise.resolve('Success');
+      /* 分頁處理 - End */
     })
     .then(() => {
       res.render('dashboard/archives', {
-        articles,
+        articles: data,
         categories,
         moment,
+        page,
         status,
         striptags,
         title: 'Archives',

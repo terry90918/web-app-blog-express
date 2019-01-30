@@ -6,7 +6,7 @@ block content
       for prop in articles
         .card.mb-3
           .card-body
-            a(href='/post.html')
+            a(href='/post/' + prop.id)
               h2.text-primary= prop.title
             .d-flex.flex-row.text-secondary.small
               .p-2
@@ -21,3 +21,4 @@ block content
                     if prop.category === item.id
                       span= item.name
             p= striptags(prop.content).slice(0, 140) + '...'
+  include /includes/pagination.pug

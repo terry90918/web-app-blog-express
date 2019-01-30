@@ -1,0 +1,10 @@
+//- include /includes/pagination.pug
+nav.my-5(aria-label='Page navigation example')
+  ul.pagination.justify-content-center
+    li.page-item(class={ 'disabled': !page.hasPre })
+      a.page-link(href='/?page=' + (page.currentPage - 1), tabindex='-1') Previous
+    - for (var i = 0; i < page.pageTotal; i++)
+      li.page-item(class={ 'active': (i + 1) === page.currentPage })
+        a.page-link(href='/?page=' + (i + 1))= i + 1
+    li.page-item(class={ 'disabled': !page.hasNext })
+      a.page-link(href='/?page=' + (page.currentPage + 1)) Next
