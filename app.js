@@ -43,7 +43,10 @@ app.use('/dashboard', routerDashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  // next(createError(404));
+  res.render('error', {
+    title: 'This is not the web page you are looking for.'
+  });
 });
 
 // error handler

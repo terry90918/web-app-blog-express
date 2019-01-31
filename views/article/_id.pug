@@ -1,0 +1,50 @@
+extends /layout/main
+
+block content
+  .hex-blog
+    nav.breadcrumb.pl-0
+      a.breadcrumb-item.text-primary(href='/') Home
+      for category in categories
+        if category.id === article.category
+          a.breadcrumb-item.text-primary(href='#')= category.name
+      span.breadcrumb-item.active= article.title
+    .row.justify-content-center
+      .col-md-9
+        h1.text-primary= article.title
+        .d-flex.flex-row.text-secondary.small
+          .p-2
+            span.px-2
+              i.far.fa-user(aria-hidden='true')
+            span 卡斯伯
+          .p-2= moment(article.update_time * 1000).format('YYYY/MM/DD')
+          .p-2
+            span.px-2
+              i.fa.fa-tag(aria-hidden='true')
+            for category in categories
+              if category.id === article.category
+                a.text-info(href='#')= category.name
+        article.text-dark.post.mb-4
+          p= striptags(article.content)
+        //- 留言
+        .card.mb-3
+          .card-body
+            #disqus_thread
+            script.
+              /**
+              *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+              *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+              /*
+              var disqus_config = function () {
+              this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              };
+              */
+              (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+              s.src = 'https://app-blog-express.disqus.com/embed.js';
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+              })();
+            noscript
+              | Please enable JavaScript to view the 
+              a(href='https://disqus.com/?ref_noscript') comments powered by Disqus.

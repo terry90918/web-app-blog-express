@@ -7,13 +7,14 @@ const convertPagination = require('../modules/convertPagination');
 
 const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
+const usersRef = db.ref(`/blog/users`);
 
 // const ref = db.ref('any');
 // ref.once('value', (snapshot) => {
 //   console.log('/', snapshot.val());
 // });
 
-/* 取得文章列表 */
+/* 取得 - 文章列表 */
 router.get('/', (req, res, next) => {
   let articles = [];
   let categories = {};
@@ -61,8 +62,8 @@ router.get('/', (req, res, next) => {
     });
 });
 
-/* 取得文章內容 */
-router.get('/post/:id', (req, res, next) => {
+/* 取得 - 文章內容 */
+router.get('/article/:id', (req, res, next) => {
   const id = req.params.id;
   let categories = {};
   let article = {};
@@ -76,7 +77,12 @@ router.get('/post/:id', (req, res, next) => {
     })
     .then((snapshot) => {
       article = snapshot.val();
-      res.render('post', {
+      if (!article) {
+        return res.render('error', {
+          title: '您尋找的文章不存在'
+        })
+      }
+      res.render('article/_id', {
         article,
         categories,
         moment,
@@ -86,8 +92,22 @@ router.get('/post/:id', (req, res, next) => {
     });
 });
 
-router.get('/dashboard/signup', (req, res, next) => {
-  res.render('dashboard/signup', { title: 'Express' });
+/* 會員資訊 */
+router.get('/user/:accountName/info', (req, res, next) => {
+  const accountName = req.params.accountName;
+  const userRef = usersRef.child(accountName);
+
+  userRef
+    .once('value')
+    .then((snapshot) => {
+      const user = snapshot.val();
+      res.render('user/info', {
+        accountName,
+        email: user.email,
+        nickname: user.nickname,
+        title: 'User Info',
+      });
+    });
 });
 
 module.exports = router;

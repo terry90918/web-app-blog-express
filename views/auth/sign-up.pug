@@ -1,7 +1,16 @@
 extends /layout/auth
 
 block content
+  if hasInfo
+    for prop in message
+      .alert.alert-warning(role='alert')= prop
   form.form-sign-up(method='POST', action='/auth/sign-up')
+    .form-label-group
+      input#exampleInputEmail1.form-control(type='text', name='accountName', placeholder='Account Name', required)
+      label(for='exampleInputEmail1') Account Name
+    .form-label-group
+      input#exampleInputEmail1.form-control(type='text', name='nickname', placeholder='Nickname', required)
+      label(for='exampleInputEmail1') Nickname
     .form-label-group
       input#exampleInputEmail1.form-control(type='email', name='email', aria-describedby='emailHelp', placeholder='Email Address', required)
       label(for='exampleInputEmail1') Email Address
