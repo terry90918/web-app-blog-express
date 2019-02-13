@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../connections/firebase_admin');
+
+/* === 插件 === */
 const striptags = require('striptags');
 const moment = require('moment');
+
+/* === 模組 === */
 const convertPagination = require('../modules/convertPagination');
 
+/* === 資料庫 === */
+const db = require('../connections/firebase_admin');
 const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
 
-// const ref = db.ref('any');
-// ref.once('value', (snapshot) => {
-//   console.log('/dashboard', snapshot.val());
-// });
-
-/* 後台首頁 */
+// 後台首頁
 router.get('/', (req, res, next) => {
   res.render('dashboard/index', {
     title: 'dashboard'

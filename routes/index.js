@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../connections/firebase_admin');
+
+/* 插件 */
 const striptags = require('striptags');
 const moment = require('moment');
+
+/* 模組 */
 const convertPagination = require('../modules/convertPagination');
 
+/* 資料庫 */
+const db = require('../connections/firebase_admin');
 const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
 const usersRef = db.ref(`/blog/users`);
-
-// const ref = db.ref('any');
-// ref.once('value', (snapshot) => {
-//   console.log('/', snapshot.val());
-// });
 
 /* 取得 - 文章列表 */
 router.get('/', (req, res, next) => {
