@@ -13,6 +13,13 @@ const articlesRef = db.ref('/blog/articles/');
 //   console.log('/dashboard', snapshot.val());
 // });
 
+/* 後台首頁 */
+router.get('/', (req, res, next) => {
+  res.render('dashboard/index', {
+    title: 'dashboard'
+  });
+});
+
 /* 取得文章列表 */
 router.get('/archives', (req, res, next) => {
   let articles = [];
