@@ -50,7 +50,7 @@ router.get('/archives', (req, res) => {
       /* 分頁處理 - Start */
       const val = convertPagination(articles, currentPage);
       data = val.data;
-      page = val.page;      
+      page = val.page;
       return Promise.resolve('Success');
       /* 分頁處理 - End */
     })
