@@ -9,14 +9,14 @@ const firebase = require('../connections/firebase_client');
 // });
 
 /* 路由 - 登入頁 */
-router.get('/sign-in', (req, res, next) => {
+router.get('/sign-in', (req, res) => {
   res.render('auth/sign-in', {
     title: 'Sign In',
   });
 });
 
 /* 寫入 - 會員登入 */
-router.post('/sign-in', (req, res, next) => {
+router.post('/sign-in', (req, res) => {
   const data = req.body;
   const email = data.email;
   const password = data.password;
@@ -42,7 +42,7 @@ router.post('/sign-in', (req, res, next) => {
 });
 
 /* 路由 - 會員登出頁 */
-router.get('/sign-out', (req, res, next) => {
+router.get('/sign-out', (req, res) => {
   req.session.uid = '';
   res.render('auth/sign-out', {
     title: 'Sign Out',
@@ -50,7 +50,7 @@ router.get('/sign-out', (req, res, next) => {
 });
 
 /* 路由 - 會員註冊頁 */
-router.get('/sign-up', (req, res, next) => {
+router.get('/sign-up', (req, res) => {
   const message = req.flash('info');
   res.render('auth/sign-up', {
     hasInfo: message.length > 0,
@@ -60,7 +60,7 @@ router.get('/sign-up', (req, res, next) => {
 });
 
 /* 寫入 - 會員註冊資料 */
-router.post('/sign-up', (req, res, next) => {
+router.post('/sign-up', (req, res) => {
   const data = req.body;
   const accountName = data.accountName;
   const email = data.email;

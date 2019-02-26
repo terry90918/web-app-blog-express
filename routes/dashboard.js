@@ -14,14 +14,14 @@ const categoriesRef = db.ref('/blog/categories/');
 const articlesRef = db.ref('/blog/articles/');
 
 // 後台首頁
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.render('dashboard/index', {
     title: 'dashboard'
   });
 });
 
 /* 取得文章列表 */
-router.get('/archives', (req, res, next) => {
+router.get('/archives', (req, res) => {
   let articles = [];
   let categories = {};
   let currentPage = Number.parseInt(req.query.page) || 1; // 當前頁數
@@ -68,7 +68,7 @@ router.get('/archives', (req, res, next) => {
 });
 
 /* 取得新增文章的需要資訊 */
-router.get('/article/create', (req, res, next) => {
+router.get('/article/create', (req, res) => {
   categoriesRef
     .once('value')
     .then((snapshot) => {
@@ -81,7 +81,7 @@ router.get('/article/create', (req, res, next) => {
 });
 
 /* 取得更新文章的需要資訊 */
-router.get('/article/:id', (req, res, next) => {
+router.get('/article/:id', (req, res) => {
   const id = req.params.id;
   let categories = {};
   let article = {};
@@ -104,7 +104,7 @@ router.get('/article/:id', (req, res, next) => {
 });
 
 /* 新增文章 */
-router.post('/article/create', (req, res, next) => {
+router.post('/article/create', (req, res) => {
   const data = req.body;
   const articleRef = articlesRef.push();
   const key = articleRef.key;
@@ -119,7 +119,7 @@ router.post('/article/create', (req, res, next) => {
 });
 
 /* 更新文章 */
-router.post('/article/update/:id', (req, res, next) => {
+router.post('/article/update/:id', (req, res) => {
   const data = req.body;
   const id = req.params.id;
   articlesRef
@@ -131,7 +131,7 @@ router.post('/article/update/:id', (req, res, next) => {
 });
 
 /* 刪除文章 */
-router.post('/article/delete/:id', (req, res, next) => {
+router.post('/article/delete/:id', (req, res) => {
   const id = req.params.id;
   articlesRef.child(id).remove();
   req.flash('info', '文章已刪除');
@@ -140,7 +140,7 @@ router.post('/article/delete/:id', (req, res, next) => {
 });
 
 /* 取得文章分類 */
-router.get('/categories', (req, res, next) => {
+router.get('/categories', (req, res) => {
   // info: 伺服器與客戶端溝通暫時儲存資料的地方, 來至於 req.flash('info', '欄位已刪除');
   const message = req.flash('info');
   categoriesRef.once('value').then((snapshot) => {
@@ -155,7 +155,7 @@ router.get('/categories', (req, res, next) => {
 });
 
 /* 新增文章分類 */
-router.post('/categories/create', (req, res, next) => {
+router.post('/categories/create', (req, res) => {
   const data = req.body;
   const categoryRef = categoriesRef.push();
   const key = categoryRef.key;
@@ -196,7 +196,7 @@ router.post('/categories/create', (req, res, next) => {
 });
 
 /* 刪除文章分類 */
-router.post('/categories/delete/:id', (req, res, next) => {
+router.post('/categories/delete/:id', (req, res) => {
   const id = req.params.id;
   categoriesRef.child(id).remove();
   req.flash('info', '欄位已刪除');

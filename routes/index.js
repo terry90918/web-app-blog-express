@@ -15,7 +15,7 @@ const articlesRef = db.ref('/blog/articles/');
 const usersRef = db.ref(`/blog/users`);
 
 /* 取得 - 文章列表 */
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   let articles = [];
   let categories = {};
   let currentPage = Number.parseInt(req.query.page) || 1; // 當前頁數
@@ -63,7 +63,7 @@ router.get('/', (req, res, next) => {
 });
 
 /* 取得 - 文章內容 */
-router.get('/article/:id', (req, res, next) => {
+router.get('/article/:id', (req, res) => {
   const id = req.params.id;
   let categories = {};
   let article = {};
@@ -93,7 +93,7 @@ router.get('/article/:id', (req, res, next) => {
 });
 
 /* 會員資訊 */
-router.get('/user/:accountName/info', (req, res, next) => {
+router.get('/user/:accountName/info', (req, res) => {
   const accountName = req.params.accountName;
   const userRef = usersRef.child(accountName);
 
