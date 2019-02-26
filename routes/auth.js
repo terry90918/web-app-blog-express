@@ -97,4 +97,22 @@ router.post('/sign-up', (req, res) => {
     });
 });
 
+/* 取的 - 登入狀態 */
+// 檢查用戶是否仍持續登入
+router.get('/sign-check', (req, res) => {
+  if (req.session.uid) {
+    res.send({
+      success: true,
+      message: '已登入帳號',
+      content: {}
+    });
+  } else {
+    res.send({
+      success: false,
+      message: '未登入帳號',
+      content: {}
+    });
+  }
+});
+
 module.exports = router;
