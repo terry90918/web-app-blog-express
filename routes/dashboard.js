@@ -137,12 +137,12 @@ router.post('/article/delete/:id', (req, res) => {
     .child(id)
     .remove()
     .then(() => {
-      req.flash('info', '文章已刪除');
-      res.send('文章已刪除');
+      req.flash('info', '文章刪除成功');
+      res.send('文章刪除成功');
     })
     .catch((error) => {
       req.flash('info', '文章刪除失敗: ' + error.message);
-      res.send('文章文章刪除失敗刪除');
+      res.send('文章刪除失敗');
     });
 });
 
