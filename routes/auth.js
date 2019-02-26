@@ -66,23 +66,32 @@ router.post('/sign-up', (req, res) => {
   const email = data.email;
   const password = data.password;
   const nickname = data.nickname;
+  const dafaultUserData = {
+    about: '',
+    accountName: '',
+    email: '',
+    job: '',
+    nickname: '',
+    picture: '',
+    uid: ''
+  };
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((response) => {
       const uid = response.user.uid;
-      const userRef = db.ref(`/blog/users/${accountName}`);
-      const userData = {
+      // const userRef = db.ref(`/blog/users/${accountName}`);
+      const userRef = db.ref('/blog/users/').push();
+      const reqUserData = {
         accountName,
         email,
         nickname,
-        uid,
+        uid
       };
+      const userData = { ...dafaultUserData, ...reqUserData };
       userRef
         .set(userData)
-        .then(() => {
-          res.render('auth/sign-up-success');
-        });
+        .then(() => res.render('auth/sign-up-success'));
     })
     .catch((error) => {
       // Handle Errors here.
