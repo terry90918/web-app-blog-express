@@ -37,9 +37,14 @@ app.use(session({
 }));
 app.use(flash());
 
+const authCheck = function (req, res, next)  {
+  if (req.session.uid) return next();
+  else res.redirect('/auth/sign-in');
+}
+
 app.use('/', routerIndex);
 app.use('/auth', routerAuth);
-app.use('/dashboard', routerDashboard);
+app.use('/dashboard', authCheck, routerDashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
