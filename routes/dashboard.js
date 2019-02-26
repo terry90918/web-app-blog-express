@@ -133,10 +133,17 @@ router.post('/article/update/:id', (req, res) => {
 /* 刪除文章 */
 router.post('/article/delete/:id', (req, res) => {
   const id = req.params.id;
-  articlesRef.child(id).remove();
-  req.flash('info', '文章已刪除');
-  res.send('文章已刪除');
-  res.end();
+  articlesRef
+    .child(id)
+    .remove()
+    .then(() => {
+      req.flash('info', '文章已刪除');
+      res.send('文章已刪除');
+    })
+    .catch((error) => {
+      req.flash('info', '文章刪除失敗: ' + error.message);
+      res.send('文章文章刪除失敗刪除');
+    });
 });
 
 /* 取得文章分類 */
